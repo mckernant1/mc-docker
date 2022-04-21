@@ -1,0 +1,14 @@
+{
+  "name": "minecraft-docker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "main": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-curseforge": "^1.0.3"
+  }
+}
