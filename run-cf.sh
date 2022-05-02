@@ -1,29 +1,29 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 cd data || exit 1
-
 
 unzip -ju *.zip
 
 start_script=$(find . -regex ".*start.*\.sh" | head -n 1)
 echo "Found start script $start_script"
 chmod +x "$start_script"
+echo "Starting Server"
+sh "$start_script" &
 
-eula_file=$(find . -name 'eula.txt')
-echo "Looking for EULA $eula_file"
+root_dir=$(find . -type f -name '*eula.txt*' -exec dirname {} \;)
 
-while [ "$eula_file" = "" ]; do
-  echo "EULA NOT FOUND STARTING SERVER"
-  ./"$start_script" &
-  sleep 30 && pkill java
-  eula_file=$(find . -name 'eula.txt')
-  echo "EULA SHOULD NOT BE NULL $eula_file"
+while [ "$root_dir" = "" ]; do
+  echo "EULA NOT FOUND WAITING"
+  sleep 5
+  root_dir=$(find . -type f -name '*eula.txt*' -exec dirname {} \;)
 done
 
-echo "Setting EULA to true"
-sed -i '' 's/eula=false/eula=true/' "$eula_file"
+echo "Found root dir to be $root_dir"
 
-echo "Starting Server"
-./"$start_script"
+echo "eula=true" >"$root_dir/eula.txt"
+cp ../ops.json "$root_dir/ops.json"
 
-
+while true; do
+  echo "Running"
+  sleep 60
+done

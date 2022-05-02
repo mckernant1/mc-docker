@@ -23,7 +23,6 @@ async function main() {
       await download(encodeURI(modUrl), 'data');
       break;
   }
-  console.log(server);
   let j = await server.getOpsJson();
   fs.writeFile('ops.json', JSON.stringify(j), (e) => console.error(e))
 }
