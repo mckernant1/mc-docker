@@ -1,14 +1,19 @@
 {
-  "name": "minecraft-docker",
+  "name": "curseforge-docker",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "cf.js",
+  "type": "module",
   "scripts": {
-    "main": "node index.js"
+    "cf": "node cf.js",
+    "paper": "node paper.js",
+    "main": "node main.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.27.2",
+    "download": "^8.0.0",
     "node-curseforge": "^1.0.3"
   }
 }
