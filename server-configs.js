@@ -3,9 +3,7 @@ import axios from "axios";
 
 export class CommonProperties {
 
-  constructor(cpu, memory, ops) {
-    this.cpu = cpu;
-    this.memory = memory;
+  constructor(ops) {
     this.ops = ops;
   }
 
@@ -28,16 +26,16 @@ export class CommonProperties {
 }
 
 export class Paper extends CommonProperties {
-  constructor(cpu, memory, ops, version) {
-    super(cpu, memory, ops);
+  constructor(ops, version) {
+    super(ops);
     this.version = version;
   }
 }
 
 export class Curseforge extends CommonProperties {
 
-  constructor(cpu, memory, ops, packId, hash) {
-    super(cpu, memory, ops);
+  constructor(ops, packId, hash) {
+    super(ops);
     this.packId = packId;
     this.hash = hash;
   }
