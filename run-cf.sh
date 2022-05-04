@@ -2,7 +2,11 @@
 
 cd data || exit 1
 
-unzip -ju *.zip
+if [ "$(ls | wc -l)" -eq 1 ]; then
+  zipfile=$(find . -name '*.zip')
+  unzip -ju "$zipfile"
+  rm "$zipfile"
+fi
 
 start_script=$(find . -regex ".*start.*\.sh" | head -n 1)
 echo "Found start script $start_script"
