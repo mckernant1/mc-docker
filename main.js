@@ -7,6 +7,8 @@ import fs from 'fs';
 async function main() {
   const serverType = process.env['SERVER_TYPE']
   const serverJson = JSON.parse(process.env['SERVER_JSON'])
+  console.log(`ServerType: ${serverType}`)
+  console.log(`ServerJson: ${JSON.stringify(serverJson)}`)
 
   let server;
   switch (serverType.toLowerCase()) {
@@ -24,10 +26,15 @@ async function main() {
       break;
   }
   let j = await server.getOpsJson();
-  fs.writeFile('ops.json', JSON.stringify(j), (e) => console.error(e))
+  fs.writeFile('ops.json', JSON.stringify(j), (e) => {
+    if (e !== null) console.log(`Hit error ${e}`)
+  });
 }
+
 // examples();
-main().then();
+main().catch(e => {
+  console.log(`Hit Error ${e}`)
+});
 
 function examples() {
   console.log(JSON.stringify(new Paper(2, 2048, ['TheeAlbinoTree'], '1.18.2')))

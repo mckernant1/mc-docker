@@ -19,6 +19,11 @@ echo "Found root dir to be $root_dir"
 echo "eula=true" >"$root_dir/eula.txt"
 cp ../ops.json "$root_dir"/ops.json
 
+if ! pgrep -x "java" > /dev/null
+then
+    java -jar "$server_jar" &
+fi
+
 while true; do
   sleep 60
   echo "Running"
